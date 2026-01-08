@@ -1,3 +1,8 @@
+-  name: Force Ansible to use Python 3.9
+   ansible.builtin.set_fact:
+     ansible_python_interpreter: /usr/bin/python3.9
+
+
 -  name: Download and extract the prometheus content
    ansible.builtin.unarchive:
      src: https://github.com/prometheus/prometheus/releases/download/v3.9.1/prometheus-3.9.1.linux-amd64.tar.gz
