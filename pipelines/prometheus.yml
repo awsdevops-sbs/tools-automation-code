@@ -15,9 +15,9 @@ pipelines:
             type: manual
             allow_only_on_success: false
           jobs:
-           ansible:
-             tasks:
-             - exec: {command: ansible-playbook, arguments: [ "-i","prometheous.awsdevops.sbs,","tools.yml","-e","ansible_user=ec2-user","-e","ansible_password=DevOps321","-e","tool_name=prometheous"] , run_if: passed }
+            ansible:
+              tasks:
+                - exec: {command: ansible-playbook, arguments: [ "-i","prometheous.awsdevops.sbs,","tools.yml","-e","ansible_user=ec2-user","-e","ansible_password=DevOps321","-e","tool_name=prometheous"] , run_if: passed }
 
 
 
