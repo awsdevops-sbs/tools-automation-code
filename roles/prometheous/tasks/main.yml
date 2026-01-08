@@ -1,17 +1,17 @@
-- name: Download and extract the prometheus content
-  ansible.builtin.unarchive:
-    src: https://github.com/prometheus/prometheus/releases/download/v3.9.1/prometheus-3.9.1.linux-amd64.tar.gz
-    dest: "/opt"
-    remote_src: yes
+-  name: Download and extract the prometheus content
+   ansible.builtin.unarchive:
+     src: https://github.com/prometheus/prometheus/releases/download/v3.9.1/prometheus-3.9.1.linux-amd64.tar.gz
+     dest: "/opt"
+     remote_src: yes
 
-- name: Copy Backend service file
-  ansible.builtin.template:
-    src: prometheus.service
-    dest: /etc/systemd/system/prometheus.service
+-  name: Copy Backend service file
+   ansible.builtin.template:
+     src: prometheus.service
+     dest: /etc/systemd/system/prometheus.service
 
-- name: Start prometheus service
-  ansible.builtin.systemd_service:
-    state: restarted
-    daemon_reload: true
-    name: prometheus
-    enabled: yes
+-  name: Start prometheus service
+   ansible.builtin.systemd_service:
+     state: restarted
+     daemon_reload: true
+     name: prometheus
+     enabled: yes
