@@ -1,0 +1,26 @@
+format_version: 10
+pipelines:
+  prometheus:
+    group: tools
+    materials:
+      git-5766e3f:
+        git: https://github.com/awsdevops-sbs/tools-automation-code.git
+        shallow_clone: false
+        auto_update: true
+        branch: main
+    stages:
+      - ansible:
+          fetch_materials: true
+          approval:
+            type: manual
+            allow_only_on_success: false
+          jobs:
+           ansible:
+             tasks:
+             - exec: {command: ansible-playbook, arguments: [ "-i","prometheous.awsdevops.sbs,","-e","ansible_user=ec2-user","-e","ansible_password=DevOps321","-e","tool_name=prometheous", "tools.yml"] , run_if: passed }
+
+
+
+
+
+
