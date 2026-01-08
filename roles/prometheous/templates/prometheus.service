@@ -1,5 +1,5 @@
 [Unit]
-Description = prometheus Service
+Description = Prometheus Server Service
 
 [Service]
 User=bin
