@@ -5,7 +5,7 @@
 
 -  name: Download and extract the prometheus content
    ansible.builtin.unarchive:
-     src: https://github.com/prometheus/prometheus/releases/download/v3.9.1/prometheus-3.9.1.linux-amd64.tar.gz
+     src: https://github.com/prometheus/prometheus/releases/download/v{{ version }}/prometheus-{{ version }}.linux-amd64.tar.gz
      dest: "/opt"
      remote_src: yes
 
