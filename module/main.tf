@@ -13,7 +13,7 @@ iam_instance_profile = "aws_iam_role.prometheous_role.name"
 
 
 resource "aws_iam_role" "prometheus_role" {
-  name = "${tool_name}-role"
+  name = "${var.tool_name}-role"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -30,12 +30,18 @@ resource "aws_iam_role" "prometheus_role" {
 }
 
 resource "aws_iam_instance_profile" "prometheus_profile" {
-  name = "${tool_name}-profile"
-  role = "aws_iam_role.${tool_name}-role.name"
+  name = "${var.tool_name}-profile"
+  role = "aws_iam_role.${var.tool_name}-role.name"
 }
 
 
-
+resource "aws_route53_record" "internal-record" {
+  name    = var.tool_name
+  type    = "A"
+  zone_id = "${var.zone_id}"
+  records = [aws_instance.instance.private_ip]
+  ttl     = "300"
+}
 
 
 resource "aws_route53_record" "record" {
