@@ -36,7 +36,7 @@ resource "aws_iam_instance_profile" "prometheus_profile" {
 
 
 resource "aws_route53_record" "internal-record" {
-  name    = var.tool_name
+  name    = "${var.tool_name}-internal"
   type    = "A"
   zone_id = "${var.zone_id}"
   records = [aws_instance.instance.private_ip]
