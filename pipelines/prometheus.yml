@@ -17,7 +17,7 @@ pipelines:
           jobs:
             ansible:
               tasks:
-                - exec: {command: ansible-playbook, arguments: [ "-i","prometheus-internal.awsdevops.sbs,","-e","ansible_user=ec2-user","-e","ansible_password=DevOps321","-e","tool_name=prometheous","tools.yml"] , run_if: passed }
+                - exec: {command: ansible-playbook, arguments: [ "-i","prometheous-internal.awsdevops.sbs,","-e","ansible_user=ec2-user","-e","ansible_password=DevOps321","-e","tool_name=prometheous","tools.yml"] , run_if: passed }
 
 
 
