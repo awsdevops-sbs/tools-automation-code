@@ -4,6 +4,8 @@ resource "aws_instance" "instance" {
   vpc_security_group_ids = [data.aws_security_group.selected.id]
   iam_instance_profile   = aws_iam_instance_profile.instance_profile.name
 
+
+
   tags = {
 
     Name= var.tool_name
@@ -29,25 +31,30 @@ resource "aws_iam_role" "role" {
     ]
   })
 
-  inline_policy {
-    name = "${var.tool_name}-inline-policy"
-
-    policy = jsonencode({
-      Version = "2012-10-17"
-      Statement = [
-        {
-          Action   = concat(var.dummy_policy, var.policy_resource_list)
-          Effect   = "Allow"
-          Resource = "*"
-        },
-      ]
-    })
-  }
-
-  tags = {
+   tags = {
     Name = "${var.tool_name}-role"
   }
 }
+
+
+
+resource "aws_iam_role_policy" "inline" {
+  name = "${var.tool_name}-inline-policy"
+  role = aws_iam_role.role.name
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [{
+      Effect   = "Allow"
+      Action   = concat(var.dummy_policy, var.policy_resource_list)
+      Resource = "*"
+    }]
+  })
+}
+
+
+
+
 
 
 
