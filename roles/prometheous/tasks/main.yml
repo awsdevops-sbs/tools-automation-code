@@ -3,7 +3,7 @@
      ansible_python_interpreter: /usr/bin/python3.9
 
 -  name: Set Prompt
-   ansible.builtin.shell: set-prompt {{ component }} - {{ env }}
+   ansible.builtin.shell: set-prompt prometheus
 
 -  name: Download and extract the prometheus content
    ansible.builtin.unarchive:
