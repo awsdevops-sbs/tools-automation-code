@@ -12,7 +12,7 @@
      remote_src: yes
      owner: bin
 
--  name: Copy Backend service file
+-  name: Copy prometheus service file
    ansible.builtin.template:
      src: prometheus.service
      dest: /etc/systemd/system/prometheus.service
