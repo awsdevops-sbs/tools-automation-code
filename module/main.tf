@@ -4,8 +4,6 @@ resource "aws_instance" "instance" {
   vpc_security_group_ids = [data.aws_security_group.selected.id]
   iam_instance_profile   = aws_iam_instance_profile.instance_profile.name
 
-
-
   tags = {
 
     Name= var.tool_name
@@ -23,7 +21,6 @@ resource "aws_iam_role" "role" {
       {
         Action = "sts:AssumeRole"
         Effect = "Allow"
-        Sid    = ""
         Principal = {
           Service = "ec2.amazonaws.com"
         }
@@ -51,14 +48,6 @@ resource "aws_iam_role_policy" "inline" {
     }]
   })
 }
-
-
-
-
-
-
-
-
 
 
 
