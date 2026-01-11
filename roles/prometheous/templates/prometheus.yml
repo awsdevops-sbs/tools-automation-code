@@ -15,6 +15,6 @@ scrape_configs:
       - source_labels: [__meta_ec2_tag_name]
         target_label: name
 
-      - source_labels: [__meta_ec2_instance_type]
-        target_label: instance_type
+      - source_labels: [__meta_ec2_tag_env]
+        target_label: env
 
