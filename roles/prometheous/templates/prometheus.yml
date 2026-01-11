@@ -3,7 +3,7 @@ global:
   evaluation_interval: 15s
 
 scrape_configs:
-  - job_name: 'ec2_instances'
+  - job_name: 'ec2_nodes'
     ec2_sd_configs:
       - region: us-east-1
         port: 9100
