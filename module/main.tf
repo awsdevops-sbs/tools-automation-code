@@ -8,7 +8,7 @@ resource "aws_instance" "instance" {
     market_type = "spot"
 
     spot_options {
-      max_price = "0.05"   # Maximum price you are willing to pay per hour
+        # Maximum price you are willing to pay per hour
       spot_instance_type = "persistent"
       instance_interruption_behavior = "stop"# Options: "one-time" or "persistent"
     }
