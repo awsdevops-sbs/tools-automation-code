@@ -1,0 +1,4 @@
+[grafana]
+name=grafana
+baseurl=https://rpm.grafana.com
+repo_gpgcheck=0
