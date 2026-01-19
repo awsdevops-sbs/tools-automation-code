@@ -11,5 +11,5 @@
      daemon-reload: yes
      name: vault
      enabled: yes
-     stated: started
+     state: started
 
