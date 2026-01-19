@@ -8,6 +8,7 @@
 
 -  name: start the vault service
    ansible.builtin.systemd_service:
+     daemon-reload: yes
      name: vault
      enabled: yes
      stated: started
