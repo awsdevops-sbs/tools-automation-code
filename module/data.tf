@@ -1,3 +1,11 @@
+terraform {
+  required_providers {
+    vault = {
+      source  = "hashicorp/vault"
+      version = "4.5.0"
+    }
+  }
+}
 data "aws_ami" "ami" {
   #most_recent      = true
   #name_regex       = "RHEL-9-DevOps-Practice"
@@ -11,4 +19,8 @@ data "aws_ami" "ami" {
 
 data "aws_security_group" "selected" {
   name = "Allow-all-from-public"
+}
+
+data "vault_generic_secret" "ssh" {
+  path = "common/ssh"
 }
