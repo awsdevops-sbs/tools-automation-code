@@ -4,15 +4,15 @@ resource "aws_instance" "instance" {
   vpc_security_group_ids = [data.aws_security_group.selected.id]
   iam_instance_profile   = aws_iam_instance_profile.instance_profile.name
 
-  instance_market_options {
-    market_type = "spot"
-
-    spot_options {
-        # Maximum price you are willing to pay per hour
-      spot_instance_type = "persistent"
-      instance_interruption_behavior = "stop"# Options: "one-time" or "persistent"
-    }
-  }
+  # instance_market_options {
+  #   market_type = "spot"
+  #
+  #   spot_options {
+  #       # Maximum price you are willing to pay per hour
+  #     spot_instance_type = "persistent"
+  #     instance_interruption_behavior = "stop"# Options: "one-time" or "persistent"
+  #   }
+  # }
 
 
   tags = {
