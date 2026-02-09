@@ -22,5 +22,5 @@ data "aws_security_group" "selected" {
 }
 
 data "vault_generic_secret" "ssh" {
-  path = "common/data/ssh"
+  path = "common/ssh"
 }
