@@ -6,8 +6,8 @@ terraform {
     }
   }
 }
-# provider "vault" {
-#   address = "https://vault.awsdevops.sbs:8200/"
-#   skip_tls_verify = true
-#   token = var.vault_token
-# }
+provider "vault" {
+  address = "https://vault-internal.awsdevops16297.sbs:8200/"
+  skip_tls_verify = true
+  token = var.vault_token
+}
