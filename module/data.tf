@@ -21,6 +21,6 @@ data "aws_security_group" "selected" {
   name = "Allow-all-from-public"
 }
 
-# data "vault_generic_secret" "ssh"{
-#   path = "common/ssh"
-# }
+data "vault_generic_secret" "ssh"{
+  path = "common/ssh"
+}
