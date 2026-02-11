@@ -1,6 +1,6 @@
 format_version: 10
 pipelines:
-  grafana:
+  elk:
     group: tools
     materials:
       git-5766e3f:
