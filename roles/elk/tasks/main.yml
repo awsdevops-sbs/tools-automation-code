@@ -37,7 +37,7 @@
 - name: search and replace server host in kibana yml
   ansible.builtin.lineinfile:
     path: /etc/elasticsearch/jvm.options
-    regexp: '^server.host: "127.0.0.1"'
+    regexp: '^server.host: localhost'
     line: 'server.host: "0.0.0.0"'
 
 -  name: Start kibana service
