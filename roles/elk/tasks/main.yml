@@ -1,0 +1,51 @@
+-  name: Force Ansible to use Python 3.9
+   ansible.builtin.set_fact:
+     ansible_python_interpreter: /usr/bin/python3.9
+
+-  name: Set Prompt
+   ansible.builtin.shell: set-prompt elk
+
+
+-  name: Copy elsaticsearch repo file
+   ansible.builtin.template:
+     src: elastic.repo
+     dest: /etc/yum.repos.d/elastic.repo
+
+-  name: Installed the elasticserach
+   ansible.builtin.dnf:
+     name: elasticsearch
+     state: installed
+
+-  name: Start elasticsearch service
+   ansible.builtin.systemd_service:
+     state: started
+     daemon_reload: true
+     name: elasticsearch
+     enabled: yes
+
+-  name: Installed the kibana
+   ansible.builtin.dnf:
+     name: kibana
+     state: installed
+
+- name: search and replace server port in kibana yml
+  ansible.builtin.lineinfile:
+    path: /etc/elasticsearch/jvm.options
+    regexp: '^#server.port: 5601'
+    line: 'server.port: 5601'
+
+- name: search and replace server host in kibana yml
+  ansible.builtin.lineinfile:
+    path: /etc/elasticsearch/jvm.options
+    regexp: '^server.host: "127.0.0.1"'
+    line: 'server.host: "0.0.0.0"'
+
+-  name: Start kibana service
+   ansible.builtin.systemd_service:
+     state: restarted
+     name: kibana
+
+
+
+
+
