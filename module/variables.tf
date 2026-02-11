@@ -7,4 +7,4 @@ variable "policy_resource_list" {}
 variable "dummy_policy" {
   default = ["ec2:DescribeInstanceTypes"]
 }
- variable "vault_token" {}
+# variable "vault_token" {}
