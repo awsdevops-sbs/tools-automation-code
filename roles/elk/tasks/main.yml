@@ -30,13 +30,13 @@
 
 - name: search and replace server port in kibana yml
   ansible.builtin.lineinfile:
-    path: /etc/elasticsearch/jvm.options
+    path: /etc/kibana/kibana.yml
     regexp: '^#server.port: 5601'
     line: 'server.port: 5601'
 
 - name: search and replace server host in kibana yml
   ansible.builtin.lineinfile:
-    path: /etc/elasticsearch/jvm.options
+    path: /etc/kibana/kibana.yml
     regexp: '^server.host: localhost'
     line: 'server.host: "0.0.0.0"'
 
