@@ -27,6 +27,6 @@ variable "tools" {
 variable "zone_id" {
   default = "Z08526923KQ6ZDBXQJFC1"
 
-
 }
 
+variable "vault_token" {}
