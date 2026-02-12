@@ -29,4 +29,4 @@ variable "zone_id" {
 
 }
 
-variable "vault_token" {}
+# variable "vault_token" {}
