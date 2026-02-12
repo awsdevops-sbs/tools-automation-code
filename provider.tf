@@ -7,7 +7,7 @@ terraform {
   }
 }
 provider "vault" {
-  address = "http://vault.awsdevops16297.sbs:8200/"
+  address = "https://vault.awsdevops16297.sbs:8200/"
   skip_tls_verify = true
   token = var.vault_token
 }
