@@ -21,7 +21,18 @@ variable "tools" {
         instance_type = "r7i.large"
         policy_resource_list = []
       }
-  }
+
+      CI_server = {
+        instance_type = "t3.small"
+        policy_resource_list = []
+      }
+
+      sonercube = {
+        instance_type = "t3.small"
+        policy_resource_list = []
+      }
+
+    }
 }
 
 variable "zone_id" {
