@@ -28,7 +28,7 @@ variable "tools" {
       }
 
       sonercube = {
-        instance_type = "t3.small"
+        instance_type = "t3.large"
         policy_resource_list = []
       }
 
