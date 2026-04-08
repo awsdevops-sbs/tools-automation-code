@@ -19,7 +19,7 @@ pipelines:
           jobs:
             ansible:
               tasks:
-                - exec: {command: ansible-playbook, arguments: [ "-i","sonar.awsdevops16297.sbs,","-e","ansible_user=ec2-user","-e","ansible_password=DevOps321","-e","tool_name=sonarqube","tools.yml"] , run_if: passed }
+                - exec: {command: ansible-playbook, arguments: [ "-i","sonar-internal.awsdevops16297.sbs,","-e","ansible_user=ec2-user","-e","ansible_password=DevOps321","-e","tool_name=sonarqube","tools.yml"] , run_if: passed }
 
 
 
