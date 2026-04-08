@@ -1,0 +1,41 @@
+-  name: Force Ansible to use Python 3.9
+   ansible.builtin.set_fact:
+     ansible_python_interpreter: /usr/bin/python3.9
+
+-  name: Set Prompt
+   ansible.builtin.shell: set-prompt sonar
+
+- name: Add User
+  ansible.builtin.user:
+    name: sonar
+
+- name: Install Java
+  ansible.builtin.dnf:
+    name: java-17.openjdk
+    state: installed
+
+- name: Create Sonar directory
+  ansible.builtin.file:
+    path: /opt/sonarqube
+    owner: sonar
+    group: sonar
+
+-  name: Download and extract the sonar content
+   ansible.builtin.unarchive:
+     src: https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-10.5.0.89998.zip
+     dest: /opt/sonarqube
+     remote_src: yes
+   become_user: sonar
+
+-  name: Copy Sonarqube service file
+   ansible.builtin.template:
+     src: sonar.service
+     dest: /etc/systemd/system/sonar.service
+
+
+-  name: Start sonarqube service
+   ansible.builtin.systemd_service:
+     state: started
+     daemon_reload: true
+     name: prometheus
+     enabled: yes
