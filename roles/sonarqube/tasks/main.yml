@@ -9,16 +9,16 @@
   ansible.builtin.user:
     name: sonar
 
-- name: Install Java
-  ansible.builtin.dnf:
-    name: java-17.openjdk
-    state: installed
+-  name: Install Java
+   ansible.builtin.dnf:
+     name: java-17.openjdk
+     state: installed
 
-- name: Create Sonar directory
-  ansible.builtin.file:
-    path: /opt/sonarqube
-    owner: sonar
-    group: sonar
+-  name: Create Sonar directory
+   ansible.builtin.file:
+     path: /opt/sonarqube
+     owner: sonar
+     group: sonar
 
 -  name: Download and extract the sonar content
    ansible.builtin.unarchive:
