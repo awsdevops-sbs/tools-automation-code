@@ -16,6 +16,7 @@
 
 -  name: Create Sonar directory
    ansible.builtin.file:
+     state: directory
      path: /opt/sonarqube
      owner: sonar
      group: sonar
