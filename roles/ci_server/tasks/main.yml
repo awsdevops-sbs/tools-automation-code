@@ -6,8 +6,8 @@
    ansible.builtin.shell: set-prompt Ci-server
 
 
-- name: Uninstall  Runner
-  ansible.builtin.shell: ./svc.sh uninstall
+#- name: Uninstall  Runner
+#  ansible.builtin.shell: ./svc.sh uninstall
 
 
 -  name: Create runner directory
