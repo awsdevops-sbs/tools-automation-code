@@ -10,20 +10,7 @@
 #  ansible.builtin.shell: ./svc.sh uninstall
 
 
--  name: Create runner directory
-   ansible.builtin.file:
-     state: directory
-     path: /home/ec2-user/github-runner
-   become_user: ec2-user
 
-- name: Check available disk space
-  ansible.builtin.shell: df / --output=avail | tail -1
-  register: disk_avail
-
-- name: Fail if less than 2GB free
-  ansible.builtin.fail:
-    msg: "Not enough disk space: {{ disk_avail.stdout | int }} KB available"
-  when: disk_avail.stdout | int < 2097152  # 2GB in KB
 
 -  name: Download and extract the runner content
    ansible.builtin.unarchive:
@@ -35,10 +22,10 @@
 -  name: Install Dependencies
    ansible.builtin.shell: /home/ec2-user/github-runner/bin/installdependencies.sh
 
--   name: Start Runner service
-    ansible.builtin.shell: ./svc.sh install; ./svc.sh start
-    args:
-      chdir: /home/ec2-user/github-runner
+-  name: Start Runner service
+   ansible.builtin.shell: ./svc.sh install; ./svc.sh start
+   args:
+     chdir: /home/ec2-user/github-runner
 
 -  name: Install Runnner
    ansible.builtin.shell: ./config.sh --unattended --url https://github.com/awsdevops-sbs --token ACELPVVCHJVYOKTD7ZS74OLJ25XZO
