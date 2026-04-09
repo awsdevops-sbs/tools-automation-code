@@ -6,11 +6,32 @@
    ansible.builtin.shell: set-prompt Ci-server
 
 
--  name: Uninstall  Runner
+#-  name: Uninstall  Runner
+#   ansible.builtin.shell: ./svc.sh uninstall
+#   args:
+#     chdir: /home/ec2-user/github-runner
+
+-  name: Stop runner service
+   ansible.builtin.shell: ./svc.sh stop
+   args:
+     chdir: /home/ec2-user/github-runner
+   ignore_errors: yes
+
+-  name: Uninstall runner service
    ansible.builtin.shell: ./svc.sh uninstall
    args:
      chdir: /home/ec2-user/github-runner
+   ignore_errors: yes
 
+-  name: Remove old runner config files
+   ansible.builtin.file:
+     path: "{{ item }}"
+     state: absent
+   loop:
+     - /home/ec2-user/github-runner/.runner
+     - /home/ec2-user/github-runner/.credentials
+     - /home/ec2-user/github-runner/.credentials_rsaparams
+   ignore_errors: yes
 
 
 -  name: Download and extract the runner content
