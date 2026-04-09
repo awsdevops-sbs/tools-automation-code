@@ -1,3 +1,2 @@
-
-    vault_token: "{{ lookup('ansible.builtin.env', 'vault_token') }}"
-    secrets: "{{lookup('hashi_vault', 'secret=Ci_server/data/CI_secret token={{ vault_token }} http://vault.awsdevops16297.sbs:8200 validate_certs=False')}}"
+vault_token: "{{ lookup('ansible.builtin.env', 'vault_token') }}"
+secrets: "{{lookup('hashi_vault', 'secret=Ci_server/data/CI_secret token={{ vault_token }} http://vault.awsdevops16297.sbs:8200 validate_certs=False')}}"
