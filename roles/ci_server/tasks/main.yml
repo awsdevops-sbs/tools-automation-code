@@ -8,7 +8,8 @@
 
 -  name: Uninstall  Runner
    ansible.builtin.shell: ./svc.sh uninstall
-
+   args:
+     chdir: /home/ec2-user/github-runner
 
 
 
