@@ -23,7 +23,7 @@
    ansible.builtin.shell: /home/ec2-user/github-runner/bin/installdependencies.sh
 
 -  name: Install Runnner
-   ansible.builtin.shell: ./config.sh --unattended --url https://github.com/awsdevops-sbs --token ACELPVVCHJVYOKTD7ZS74OLJ25XZO
+   ansible.builtin.shell: ./config.sh --unattended --url https://github.com/awsdevops-sbs --token ACELPVQK6DYZF7GOAMXRFI3J26ROY
    args:
      chdir: /home/ec2-user/github-runner
    become_user: ec2-user
