@@ -1,4 +1,4 @@
 - name: Read runner token from Vault
   set_fact:
     runner_token: "{{ lookup('community.hashi_vault.hashi_vault',
-      'secret=Ci_server/data/Ci_secret token={{ vault_token }} url={{ vault_url }} field=Github_Runner_Token') }}"
+      'secret=Ci_server/data/CI_secret token={{ vault_token }} url={{ vault_url }} field=Github_Runner_Token') }}"
