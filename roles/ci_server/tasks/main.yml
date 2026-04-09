@@ -6,6 +6,10 @@
    ansible.builtin.shell: set-prompt Ci-server
 
 
+- name: Uninstall  Runner
+  ansible.builtin.shell: ./svc.sh uninstall
+
+
 -  name: Create runner directory
    ansible.builtin.file:
      state: directory
@@ -15,14 +19,44 @@
 -  name: Download and extract the runner content
    ansible.builtin.unarchive:
      src: https://github.com/actions/runner/releases/download/v2.315.0/actions-runner-linux-x64-2.315.0.tar.gz
-     dest: /home/ec2-user
+     dest: /home/ec2-user/github-runner
      remote_src: yes
    become_user: ec2-user
 
 -  name: Install Dependencies
    ansible.builtin.shell: /home/ec2-user/github-runner/bin/installdependencies.sh
 
-- name: Start Runner
-  ansible.builtin.shell: ./svc.sh install; ./svc.sh start
-  args:
-    chdir: /home/ec2-user/github-runner
+-   name: Start Runner service
+    ansible.builtin.shell: ./svc.sh install; ./svc.sh start
+    args:
+      chdir: /home/ec2-user/github-runner
+
+-  name: Install Runnner
+   ansible.builtin.shell: ./config.sh --unattended --url https://github.com/awsdevops-sbs --token ACELPVVCHJVYOKTD7ZS74OLJ25XZO
+   args:
+     chdir: /home/ec2-user/github-runner
+   become_user: ec2-user
+
+-  name: Disable default Nodejs version
+   ansible.builtin.shell: dnf module disable nodejs -y
+
+-  name: Enable nodejs module for v20
+   ansible.builtin.shell: dnf module enable nodejs:20 -y
+
+
+-  name: Install NodeJS
+   ansible.builtin.dnf:
+     name: nodejs
+     state: installed
+
+-  name: Install Java
+   ansible.builtin.dnf:
+     name: java-17-openjdk
+     state: installed
+
+-  name: Download sonar scanner
+   ansible.builtin.unarchive:
+     src: https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.3006-linux.zip
+     dest: /opt
+     remote_src: yes
+
