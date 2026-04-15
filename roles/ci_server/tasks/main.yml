@@ -65,10 +65,7 @@
 #   ignore_errors: yes
 
 -  name: Configure runner
-   ansible.builtin.shell: >
-     ./config.sh --unattended
-     --url https://github.com/awsdevops-sbs
-     --token {{ secrets.Github_Runner_Token }}
+   ansible.builtin.shell: ./config.sh remove --token {{secrets.Github_Runner_Token}}; ./config.sh --unattended --replace --url https://github.com/awsdevops-sbs --token {{secrets.Github_Runner_Token}}
    args:
      chdir: /home/ec2-user/github-runner
    become_user: ec2-user
