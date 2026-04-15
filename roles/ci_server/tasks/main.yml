@@ -66,6 +66,7 @@
 
 -  name: Configure runner
    ansible.builtin.shell: >
+     ./config.sh remove --token {{secrets.Github_Runner_Token}}
      ./config.sh --unattended
      --url https://github.com/awsdevops-sbs
      --token {{ secrets.Github_Runner_Token }}
