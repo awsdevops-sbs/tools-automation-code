@@ -1,0 +1,7 @@
+[artifactory]
+name=artifactory
+baseurl=https://releases.jfrog.io/artifactory/artifactory-rpms/artifactory-rpms.repo
+gpgcheck=0
+enabled=1
+
+

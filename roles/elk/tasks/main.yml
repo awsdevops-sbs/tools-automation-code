@@ -8,8 +8,8 @@
 
 -  name: Copy elsaticsearch repo file
    ansible.builtin.template:
-     src: elastic.repo
-     dest: /etc/yum.repos.d/elastic.repo
+     src: jfrog.repo
+     dest: /etc/yum.repos.d/jfrog.repo
 
 -  name: Installed the elasticserach
    ansible.builtin.dnf:
