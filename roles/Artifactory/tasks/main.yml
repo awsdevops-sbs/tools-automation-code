@@ -16,8 +16,6 @@
     state: installed
     disable_gpg_check: true
 
-# ✅ ADD POSTGRESQL TASKS HERE ↓
-
 - name: Install PostgreSQL
   ansible.builtin.dnf:
     name:
@@ -29,6 +27,13 @@
   ansible.builtin.command: postgresql-setup --initdb
   args:
     creates: /var/lib/pgsql/data/PG_VERSION
+
+# ✅ FIX: Change ident to md5 authentication
+- name: Configure PostgreSQL authentication to md5
+  ansible.builtin.replace:
+    path: /var/lib/pgsql/data/pg_hba.conf
+    regexp: 'ident'
+    replace: 'md5'
 
 - name: Start PostgreSQL
   ansible.builtin.systemd_service:
@@ -52,8 +57,6 @@
           url: "jdbc:postgresql://localhost:5432/artifactory"
           username: artifactory
           password: artifactory
-
-# ✅ THEN START ARTIFACTORY ↓
 
 - name: Start artifactory service
   ansible.builtin.systemd_service:
