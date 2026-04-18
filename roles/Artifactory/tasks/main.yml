@@ -1,66 +1,79 @@
-- name: Force Ansible to use Python 3.9
-  ansible.builtin.set_fact:
-    ansible_python_interpreter: /usr/bin/python3.9
+-  name: Force Ansible to use Python 3.9
+   ansible.builtin.set_fact:
+     ansible_python_interpreter: /usr/bin/python3.9
 
-- name: Set Prompt
-  ansible.builtin.shell: set-prompt Artifactory
+-  name: Set Prompt
+   ansible.builtin.shell: set-prompt Artifactory
 
-- name: Copy artifactory repo file
-  ansible.builtin.template:
-    src: jfrog.repo
-    dest: /etc/yum.repos.d/jfrog-artifactory-rpms.repo
+-  name: Copy artifactory repo file
+   ansible.builtin.template:
+     src: jfrog.repo
+     dest: /etc/yum.repos.d/jfrog-artifactory-rpms.repo
 
-- name: Install artifactory
-  ansible.builtin.dnf:
-    name: jfrog-artifactory-oss
-    state: installed
-    disable_gpg_check: true
+-  name: Install artifactory version 7.77.14
+   ansible.builtin.dnf:
+     name: jfrog-artifactory-oss-7.77.14
+     state: installed
+     disable_gpg_check: true
 
-- name: Install PostgreSQL
-  ansible.builtin.dnf:
-    name:
-      - postgresql-server
-      - python3-psycopg2
-    state: installed
+-  name: Install PostgreSQL
+   ansible.builtin.dnf:
+     name:
+       - postgresql-server
+       - python3-psycopg2
+     state: installed
 
-- name: Initialize PostgreSQL
-  ansible.builtin.command: postgresql-setup --initdb
-  args:
-    creates: /var/lib/pgsql/data/PG_VERSION
+-  name: Initialize PostgreSQL
+   ansible.builtin.command: postgresql-setup --initdb
+   args:
+     creates: /var/lib/pgsql/data/PG_VERSION
 
-# ✅ FIX: Change ident to md5 authentication
-- name: Configure PostgreSQL authentication to md5
-  ansible.builtin.replace:
-    path: /var/lib/pgsql/data/pg_hba.conf
-    regexp: 'ident'
-    replace: 'md5'
+-  name: Allow md5 authentication in PostgreSQL
+   ansible.builtin.replace:
+     path: /var/lib/pgsql/data/pg_hba.conf
+     regexp: 'ident'
+     replace: 'md5'
 
-- name: Start PostgreSQL
-  ansible.builtin.systemd_service:
-    name: postgresql
-    state: started
-    enabled: yes
+-  name: Start PostgreSQL
+   ansible.builtin.systemd_service:
+     name: postgresql
+     state: started
+     enabled: yes
 
-- name: Create DB user and database
-  ansible.builtin.shell: |
-    sudo -u postgres psql -c "CREATE USER artifactory WITH PASSWORD 'artifactory';" || true
-    sudo -u postgres psql -c "CREATE DATABASE artifactory OWNER artifactory;" || true
+-  name: Create Artifactory DB user and database
+   ansible.builtin.shell: |
+     sudo -u postgres psql -c "CREATE USER artifactory WITH PASSWORD 'artifactory';" || true
+     sudo -u postgres psql -c "CREATE DATABASE artifactory OWNER artifactory;" || true
+     sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE artifactory TO artifactory;" || true
 
-- name: Configure Artifactory to use PostgreSQL
-  ansible.builtin.copy:
-    dest: /opt/jfrog/artifactory/var/etc/system.yaml
-    content: |
-      shared:
-        database:
-          driver: org.postgresql.Driver
-          type: postgresql
-          url: "jdbc:postgresql://localhost:5432/artifactory"
-          username: artifactory
-          password: artifactory
+-  name: Configure Artifactory to use PostgreSQL
+   ansible.builtin.copy:
+     dest: /opt/jfrog/artifactory/var/etc/system.yaml
+     owner: artifactory
+     group: artifactory
+     content: |
+       shared:
+         database:
+           driver: org.postgresql.Driver
+           type: postgresql
+           url: "jdbc:postgresql://localhost:5432/artifactory"
+           username: artifactory
+           password: artifactory
 
-- name: Start artifactory service
-  ansible.builtin.systemd_service:
-    state: started
-    daemon_reload: true
-    name: artifactory
-    enabled: yes
+-  name: Start artifactory service
+   ansible.builtin.systemd_service:
+     state: started
+     daemon_reload: true
+     name: artifactory
+     enabled: yes
+
+#-  name: Wait for Artifactory to be ready
+#   ansible.builtin.uri:
+#     url: http://localhost:8081/artifactory/api/system/ping
+#     user: admin
+#     password: password
+#     status_code: 200
+#   retries: 30
+#   delay: 10
+#   register: result
+#   until: result.status == 200
