@@ -1,7 +1,6 @@
 [artifactory]
 name=artifactory
-baseurl=https://releases.jfrog.io/artifactory/artifactory-rpms
-gpgcheck=0
+baseurl=https://releases.jfrog.io/artifactory/artifactory-rpms/
 enabled=1
-
+gpgcheck=0
 
