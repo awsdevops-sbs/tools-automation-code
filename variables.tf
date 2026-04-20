@@ -34,6 +34,7 @@ variable "tools" {
 
       artifactory = {
         instance_type = "t3.large"
+        volume_size = 35
         policy_resource_list = []
       }
 
