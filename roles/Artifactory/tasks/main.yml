@@ -67,7 +67,8 @@
     dnf clean all
     rm -rf /var/cache/dnf/*
     find /var/log -name "*.log" -mtime +1 -exec truncate -s 0 {} \;
-    dnf install -y --downloaddir=/var/tmp jfrog-artifactory-oss-7.77.14 postgresql-server python3-psycopg2 --nogpgcheck
+    dnf install -y jfrog-artifactory-oss-7.77.14 postgresql-server python3-psycopg2 --nogpgcheck
+
 
 - name: Setup PostgreSQL
   ansible.builtin.shell: |
