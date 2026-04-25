@@ -26,15 +26,28 @@
      src: sample-dashboard.json
      dest: /etc/grafana/provisioning/dashboards/sample-dashboard.json
 
--  name: import dashboard
-   community.general.grafana_dashboard:
-     url: http://localhost:3000
-     login_user: admin
-     login_password: Saira@123
+#-  name: import dashboard
+#   community.general.grafana_dashboard:
+#     url:
+#     login_user: admin
+#     login_password:
+#     state: present
+#     commit_message: "update by ansible"
+#     overwrite: true
+#     path: /tmp/sample-dashboard.json
+
+
+-  name: Import Grafana dashboard
+   community.grafana.grafana_dashboard:
+     grafana_url: http://localhost:3000
+     grafana_user: "admin"
+     grafana_password: "{{ Saira@123 }}"
      state: present
-     commit_message: "update by ansible"
+     commit_message: Updated by ansible
      overwrite: true
      path: /tmp/sample-dashboard.json
+
+
 
 
 -  name: Start grafana service
