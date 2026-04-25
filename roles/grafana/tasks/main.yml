@@ -33,7 +33,9 @@
      login_password: Saira@123
      state: present
      commit_message: "update by ansible"
-     dashboard: /etc/grafana/provisioning/dashboards/sample-dashboard.json
+     overwrite: true
+     path: /etc/grafana/provisioning/dashboards/sample-dashboard.json
+
 
 -  name: Start grafana service
    ansible.builtin.systemd_service:
