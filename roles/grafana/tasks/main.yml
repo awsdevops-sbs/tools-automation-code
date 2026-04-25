@@ -24,7 +24,7 @@
 -  name: Copy dashboard jason file
    ansible.builtin.template:
      src: sample-dashboard.json
-     dest: /etc/grafana/provisioning/dashboards/sample-dashboard.json
+     dest: /tmp/sample-dashboard.json
 
 #-  name: import dashboard
 #   community.general.grafana_dashboard:
