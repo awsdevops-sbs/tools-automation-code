@@ -34,7 +34,7 @@
      state: present
      commit_message: "update by ansible"
      overwrite: true
-     path: /etc/grafana/provisioning/dashboards/sample-dashboard.json
+     path: /tmp/sample-dashboard.json
 
 
 -  name: Start grafana service
