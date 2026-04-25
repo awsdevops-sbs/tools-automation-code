@@ -16,6 +16,25 @@
      name: grafana
      state: installed
 
+-  name: Copy datasource (pom-datasource.yml)
+   ansible.builtin.template:
+     src: pom-datasource.yml
+     dest: /etc/grafana/provisioning/datasources/pom-datasource.yml
+
+-  name: Copy dashboard jason file
+   ansible.builtin.template:
+     src: sample-dashboard.json
+     dest: /etc/grafana/provisioning/dashboards/sample-dashboard.json
+
+-  name: import dashboard
+   community.general.grafana_dashboard:
+     url: http://localhost:3000
+     login_user: admin
+     login_password: Saira@123
+     state: present
+     commit_message: "update by ansible"
+     dashboard: /etc/grafana/provisioning/dashboards/sample-dashboard.json
+
 -  name: Start grafana service
    ansible.builtin.systemd_service:
      state: started
