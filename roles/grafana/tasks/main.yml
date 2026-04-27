@@ -26,6 +26,11 @@
      src: sample-dashboard.json
      dest: /tmp/sample-dashboard.json
 
+-  name: Copy dashboard json file
+   ansible.builtin.file:
+     src: dashboard.json
+     dest: /tmp/dashboard.json
+
 #-  name: import dashboard
 #   community.general.grafana_dashboard:
 #     url:
