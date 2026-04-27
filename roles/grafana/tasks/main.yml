@@ -41,7 +41,7 @@
    community.grafana.grafana_folder:
      grafana_url: http://localhost:3000
      grafana_user: "admin"
-     grafana_password: "Saira@123"
+     grafana_password: "DevOps321"
      title: "Project Dashboards"
      state: present
 
@@ -49,7 +49,7 @@
    community.grafana.grafana_dashboard:
      grafana_url: http://localhost:3000
      grafana_user: "admin"
-     grafana_password: "Saira@123"
+     grafana_password: "DevOps321"
      state: present
      commit_message: Updated by ansible
      folder: "Project Dashboards"
