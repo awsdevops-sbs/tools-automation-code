@@ -46,6 +46,16 @@
      overwrite: true
      path: /tmp/sample-dashboard.json
 
+-  name: Import Grafana dashboard
+   community.grafana.grafana_dashboard:
+     grafana_url: http://localhost:3000
+     grafana_user: "admin"
+     grafana_password: "Saira@123"
+     state: present
+     commit_message: Updated by ansible
+     overwrite: true
+     path: /tmp/sample-dashboard.json
+
 
 
 
