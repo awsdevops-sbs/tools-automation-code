@@ -59,7 +59,7 @@
      commit_message: Updated by ansible
      folder: "Project Dashboards"
      overwrite: true
-     path: /tmp/sample-node-exporter.json
+     path: /tmp/sample-dashboard.json
 
 
 
