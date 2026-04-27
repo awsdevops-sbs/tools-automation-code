@@ -21,7 +21,7 @@
      src: pom-datasource.yml
      dest: /etc/grafana/provisioning/datasources/pom-datasource.yml
 
--  name: Copy dashboard jason file
+-  name: Copy dashboard json file
    ansible.builtin.template:
      src: sample-dashboard.json
      dest: /tmp/sample-dashboard.json
@@ -36,6 +36,15 @@
 #     overwrite: true
 #     path: /tmp/sample-dashboard.json
 
+
+-  name: Create Grafana folder
+   community.grafana.grafana_folder:
+     grafana_url: http://localhost:3000
+     grafana_user: "admin"
+     grafana_password: "Saira@123"
+     title: "Project Dashboards"
+     state: present
+
 -  name: Import Grafana dashboard
    community.grafana.grafana_dashboard:
      grafana_url: http://localhost:3000
@@ -43,18 +52,12 @@
      grafana_password: "Saira@123"
      state: present
      commit_message: Updated by ansible
-     folder: Project Dashboards
+     folder: "Project Dashboards"
      overwrite: true
      path: /tmp/sample-dashboard.json
 
 
--  name: Create Grafana folder
-   community.grafana.grafana_folder:
-     grafana_url: http://localhost:3000
-     grafana_user: "admin"
-     grafana_password: "Saira@123"
-     title: Project Dashboards
-     state: present
+
 
 
 -  name: Start grafana service
