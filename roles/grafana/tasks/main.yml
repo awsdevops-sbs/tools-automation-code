@@ -21,25 +21,15 @@
      src: pom-datasource.yml
      dest: /etc/grafana/provisioning/datasources/pom-datasource.yml
 
--  name: Copy dashboard json file
-   ansible.builtin.template:
-     src: sample-dashboard.json
-     dest: /tmp/sample-dashboard.json
+#-  name: Copy dashboard json file
+#   ansible.builtin.template:
+#     src: sample-dashboard.json
+#     dest: /tmp/sample-dashboard.json
 
 -  name: Copy dashboard json file
    ansible.builtin.copy:
      src: node-exporter.json
      dest: /tmp/node-exporter.json
-
-#-  name: import dashboard
-#   community.general.grafana_dashboard:
-#     url:
-#     login_user: admin
-#     login_password:
-#     state: present
-#     commit_message: "update by ansible"
-#     overwrite: true
-#     path: /tmp/sample-node-exporter.json
 
 
 -  name: Create Grafana folder
