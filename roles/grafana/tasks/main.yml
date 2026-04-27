@@ -23,8 +23,8 @@
 
 -  name: Copy dashboard json file
    ansible.builtin.template:
-     src: sample-node-exporter.json
-     dest: /tmp/sample-node-exporter.json
+     src: sample-dashboard.json
+     dest: /tmp/sample-dashboard.json
 
 -  name: Copy dashboard json file
    ansible.builtin.copy:
