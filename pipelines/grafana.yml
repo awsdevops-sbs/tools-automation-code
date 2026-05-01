@@ -8,7 +8,7 @@ pipelines:
         shallow_clone: false
         auto_update: true
         branch: main
-      secure_variables:
+    secure_variables:
         vault_token: AES:U0sg7KpcTxZAEdlnMlpDMA==:FxINJdICkPIxs4AVfMQTnnvCWikRpol5GDGrk6szHpg=
     stages:
       - ansible:
