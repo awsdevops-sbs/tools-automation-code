@@ -1,0 +1,5 @@
+vault_token: "{{ lookup('ansible.builtin.env', 'vault_token') }}"
+
+secrets: "{{ lookup('community.hashi_vault.hashi_vault',
+  'secret=common/data/common token=' ~ vault_token ~
+  ' url=http://vault.awsdevops16297.sbs:8200 validate_certs=False') }}"
