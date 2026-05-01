@@ -30,11 +30,13 @@
 
 -  name: Create Grafana folder
    community.grafana.grafana_folder:
-     grafana_url: http://localhost:3000
-     grafana_user: "admin"
-     grafana_password: "DevOps321"
+     grafana_url: "http://localhost:3000"
+     grafana_user: "{{ secrets.grafana_user }}"
+     grafana_password: "{{ secrets.grafana_password }}"
+     org_id: 1
      title: "Project Dashboards"
      state: present
+
 
 
 
