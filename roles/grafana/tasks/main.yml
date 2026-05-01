@@ -26,6 +26,12 @@
 #     src: sample-dashboard.json
 #     dest: /tmp/sample-dashboard.json
 
+-  name: Start grafana service
+   ansible.builtin.systemd_service:
+     state: started
+     daemon_reload: true
+     name: grafana-server
+     enabled: yes
 
 
 -  name: Create Grafana folder
